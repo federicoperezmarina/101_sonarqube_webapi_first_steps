@@ -1,5 +1,7 @@
 # 101_sonarqube_webapi_first_steps
-This repository explains how to use sonarqube webapi
+This repository explains how to use sonarqube webapi.
+
+We can find here the documentation of the [sonarqube api](https://sonarcloud.io/web_api/)
 
 ## Table of Contents (api)
 * [Sonarqube project search](#sonarqube-project-search)
