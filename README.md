@@ -10,9 +10,11 @@ We can find here the documentation of the [sonarqube api](https://sonarcloud.io/
 * [Sonarqube measures by project](#sonarqube-measures-by-project)
 
 ## Sonarqube project search
-Here you can find an example of the api/project/search [sonarqube_projects_search.py](sonarqube_projects_search.py)
+Here you can find an example with the code of the api/project/search 
+file: [sonarqube_projects_search.py](sonarqube_projects_search.py)
 
-'''python
+Code:
+```python
 import json , requests, pprint
 import os
 from os.path import join, dirname
@@ -40,8 +42,12 @@ output = json.loads(binary)
 
 for project in output['components']:
 	print(project)
+```
 
-'''
+How to run the code:
+```sh
+python sonarqube_projects_search.py
+```
 
 ## Sonarqube metrics search
 Here you can find an example of the api/metrics/search [sonarqube_metrics_search.py](sonarqube_metrics_search.py)
