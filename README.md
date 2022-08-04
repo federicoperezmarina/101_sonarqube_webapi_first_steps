@@ -12,6 +12,37 @@ We can find here the documentation of the [sonarqube api](https://sonarcloud.io/
 ## Sonarqube project search
 Here you can find an example of the api/project/search [sonarqube_projects_search.py](sonarqube_projects_search.py)
 
+'''python
+import json , requests, pprint
+import os
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+
+myToken = os.environ.get("TOKEN")
+host = os.environ.get("HOST")
+
+api = '/api/projects/search'
+params = '?ps=500'
+url = host+api+params
+
+session = requests.Session()
+session.auth = myToken, ''
+
+call = getattr(session, 'get')
+res = call(url)
+print(res.status_code)
+
+binary = res.content
+output = json.loads(binary)
+
+for project in output['components']:
+	print(project)
+
+'''
+
 ## Sonarqube metrics search
 Here you can find an example of the api/metrics/search [sonarqube_metrics_search.py](sonarqube_metrics_search.py)
 
