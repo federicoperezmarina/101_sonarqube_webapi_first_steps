@@ -11,7 +11,7 @@ We can find here the documentation of the [sonarqube api](https://sonarcloud.io/
 
 ## Sonarqube project search
 Here you can find an example with the code of the api/project/search 
-file: [sonarqube_projects_search.py](sonarqube_projects_search.py)
+File: [sonarqube_projects_search.py](sonarqube_projects_search.py)
 
 Code:
 ```python
@@ -51,7 +51,7 @@ python sonarqube_projects_search.py
 
 ## Sonarqube metrics search
 Here you can find an example of the api/metrics/search 
-file: [sonarqube_metrics_search.py](sonarqube_metrics_search.py)
+File: [sonarqube_metrics_search.py](sonarqube_metrics_search.py)
 
 Code:
 ```python
@@ -205,7 +205,48 @@ Number of metrics:
 ```
 
 ## Sonarqube measure search
-Here you can find an example of the api/measure/search [sonarqube_measure_search.py](sonarqube_measure_search.py)
+Here you can find an example of the api/measure/search 
+File: [sonarqube_measure_search.py](sonarqube_measure_search.py)
+
+Code:
+```python
+import json , requests, pprint
+import os
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+
+myToken = os.environ.get("TOKEN")
+host = os.environ.get("HOST")
+
+api = '/api/measures/search'
+metrics = '?metricKeys=alert_status,bugs,reliability_rating,vulnerabilities,security_rating,code_smells,sqale_rating,duplicated_lines_density,coverage,ncloc,ncloc_language_distribution'
+
+#projects separated by coma
+projects = '&projectKeys='+'XXXXX' 
+
+url = host+api+metrics+projects
+#print(url)
+
+session = requests.Session()
+session.auth = myToken, ''
+
+call = getattr(session, 'get')
+res = call(url)
+
+binary = res.content
+output = json.loads(binary)
+
+for metric in output['measures']:
+	print(metric)
+```
+
+How to execute the code:
+```sh
+python sonarqube_measure_search.py
+```
 
 ## Sonarqube measures by project
 Here you can find an example more complex using two api api/project/search and api/measure/component [sonarqube_measures_by_project.py](sonarqube_measures_by_project.py)
