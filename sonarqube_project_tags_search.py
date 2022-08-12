@@ -9,8 +9,8 @@ load_dotenv(dotenv_path)
 myToken = os.environ.get("TOKEN")
 host = os.environ.get("HOST")
 
-api = '/api/projects/search'
-params = '?ps=500'
+api = '/api/project_tags/search'
+params = '?ps=100'
 url = host+api+params
 
 session = requests.Session()
@@ -24,6 +24,3 @@ binary = res.content
 output = json.loads(binary)
 
 print(output)
-
-for project in output['components']:
-	print(project)
